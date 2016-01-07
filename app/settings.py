@@ -1,5 +1,6 @@
 # Django settings for celery_test project.
 import djcelery
+
 djcelery.setup_loader()
 
 from local_settings import *
@@ -79,7 +80,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -89,7 +90,7 @@ SECRET_KEY = 'ajl=&5_h3qfai1itenlr0uq9)tix@zd-#@yowes8q8miqch2=s'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,8 +110,8 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-	'app',
-	'djcelery',
+    'app',
+    'djcelery',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -145,3 +146,5 @@ LOGGING = {
         },
     }
 }
+
+COUNTDOWN_THRESHOLD = 100
