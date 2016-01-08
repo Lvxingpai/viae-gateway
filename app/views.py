@@ -37,7 +37,7 @@ def tasks(request):
         kwargs = task_data.get('kwargs', {})
         countdown = task_data.get('countdown')
 
-        if countdown > COUNTDOWN_THRESHOLD:
+        if countdown > TASK_COUNTDOWN_THRESHOLD:
             eta = datetime.utcnow() + timedelta(seconds=countdown)
             id = str(uuid.uuid4())
             data = {'task': task, '_id': id, 'args': args, 'kwargs': kwargs, 'eta': eta}
