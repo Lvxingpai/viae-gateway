@@ -18,4 +18,5 @@ def mongo_to_celery():
         task = task['task']
         result = celery.send_task(task, serializer='json', args=args, kwargs=kwargs, eta=eta,
                                   expires=expires)
+        delete = coll.remove({'task':task})
     mongo_to_celery.apply_async(countdown=60)
