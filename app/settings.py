@@ -1,3 +1,4 @@
+# coding=utf-8
 # Django settings for celery_test project.
 import djcelery
 
@@ -147,6 +148,11 @@ LOGGING = {
     }
 }
 
-COUNTDOWN_THRESHOLD = 100
-TASK_ETA_THRESHOLD = 3600
+# 进入mongodb的时间阈值
+TASK_COUNTDOWN_THRESHOLD = 1800
+
+# 从Mongo中取出任务,放入Celery的时间阈值
+TASK_ETA_THRESHOLD = 600
+
+# Mongo轮询的时间间隔
 TASK_POLLING_INTERVAL = 60

@@ -38,7 +38,7 @@ def tasks(request):
         countdown = task_data.get('countdown')
 
         if countdown > COUNTDOWN_THRESHOLD:
-            eta = datetime.now() + timedelta(seconds=countdown)
+            eta = datetime.utcnow() + timedelta(seconds=countdown)
             id = str(uuid.uuid4())
             data = {'task': task, '_id': id, 'args': args, 'kwargs': kwargs, 'eta': eta}
             send_to_mongo(data)
