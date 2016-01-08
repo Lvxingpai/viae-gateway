@@ -8,8 +8,6 @@ from settings import *
 
 from django.http import HttpResponse, Http404
 from djcelery import celery
-import pymongo
-from pymongo import MongoClient
 
 client = MongoClient(MONGO_URL)
 
@@ -21,9 +19,7 @@ def send_to_mongo(task_data):
     :return:
     """
     db = client.viae
-    viae = db.viae
-    post_id = viae.insert_one(task_data).inserted_id
-    print(post_id, db.collection_names(include_system_collections=False))
+    post_id = db.ViaeTask.insert_one(task_data).inserted_id
 
 
 def tasks(request):
