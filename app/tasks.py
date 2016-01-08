@@ -9,7 +9,7 @@ client = MongoClient(MONGO_URL)
 @celery.task(name='viae.gateway.stashTask', bind=True, acks_late=True)
 def mongo_to_celery():
     coll = client.viae.ViaeTask
-    tasks = coll.find({'eta': {'$lt': datetime.now() + timedelta(seconds=TASK_ETA_THRESHOLD)}})
+    tasks = coll.find({'eta': {'$lt': datetime.utcnow() + timedelta(seconds=TASK_ETA_THRESHOLD)}})
     for task in tasks:
         args = task.get('args', [])
         kwargs = task.get('kwargs', {})
