@@ -6,6 +6,6 @@ from app.views import tasks
 # admin.autodiscover()
 
 urlpatterns = [
-    url(r'^tasks/$', tasks)
+    url(r'^tasks$', tasks)
 ]
 

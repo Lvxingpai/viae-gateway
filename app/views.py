@@ -3,11 +3,11 @@
 import json
 import uuid
 from datetime import datetime, timedelta
-import time
 from settings import *
 
 from django.http import HttpResponse, Http404
 from djcelery import celery
+from pymongo import MongoClient
 
 client = MongoClient(MONGO_URL)
 
@@ -18,8 +18,7 @@ def send_to_mongo(task_data):
     :param task_data:
     :return:
     """
-    db = client.viae
-    post_id = db.ViaeTask.insert_one(task_data).inserted_id
+    client.viae.ViaeTask.insert_one(task_data)
 
 
 def tasks(request):
@@ -42,7 +41,7 @@ def tasks(request):
             eta = datetime.now() + timedelta(seconds=countdown)
             data = {'task': task, 'id': str(uuid.uuid4()), 'args': args, 'kwargs': kwargs, 'eta': eta}
             send_to_mongo(data)
-            data = {'taskId': '1111111111111111111111'}
+            data = {'task': 0}
             return HttpResponse(json.dumps(data), content_type="application/json")
 
         else:
