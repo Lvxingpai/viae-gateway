@@ -60,3 +60,4 @@ target/
 app/local_settings.py
 
 .idea/*
+*.db
