@@ -8,8 +8,24 @@ from local_settings import *
 
 ## Celery config ##
 CELERY_DEFAULT_QUEUE = 'viae'
+CELERY_DEFAULT_ROUTING_KEY = 'celery'
+CELERY_CREATE_MISSING_QUEUES = True
 CELERY_DEFAULT_EXCHANGE = 'viae'
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_QUEUES = {
+    'stashed_tasks': {
+        'exchange': 'viae',
+        'routing_key': 'stashed_tasks'
+    }
+}
+CELERY_RESULT_BACKEND = ''
+
+DATABASES = {
+   'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'development.db',
+    }
+}
 
 ## END config ##
 
@@ -152,7 +168,7 @@ LOGGING = {
 TASK_COUNTDOWN_THRESHOLD = 1800
 
 # 从Mongo中取出任务,放入Celery的时间阈值
-TASK_ETA_THRESHOLD = 600
+TASK_ETA_THRESHOLD = 6000
 
 # Mongo轮询的时间间隔
-TASK_POLLING_INTERVAL = 60
+TASK_POLLING_INTERVAL = 10
