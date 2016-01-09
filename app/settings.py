@@ -1,9 +1,11 @@
-# coding=utf-8 # Django settings for celery_test project.
+# coding=utf-8
+#  Django settings for celery_test project.
+
 import djcelery
 from datetime import timedelta
-djcelery.setup_loader()
-
 from local_settings import *
+
+djcelery.setup_loader()
 
 ## Celery config ##
 CELERY_DEFAULT_QUEUE = 'viae'

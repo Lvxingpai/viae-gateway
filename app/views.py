@@ -2,14 +2,13 @@
 # Create your views here.
 import json
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 
-from app import settings
-from settings import *
-
-from django.http import HttpResponse, Http404, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound
 from djcelery import celery
+
 from database import client
+from settings import *
 
 
 def stash_to_mongo(task_data):
@@ -19,21 +18,6 @@ def stash_to_mongo(task_data):
     :return:
     """
     client.viae.ViaeTask.insert_one(task_data)
-
-
-def start_polling(request):
-    """
-    启动Polling
-    :param request:
-    :return:
-    """
-    if request.method != 'POST':
-        return HttpResponseNotFound()
-
-    from app.tasks import polling_tasks
-
-    polling_tasks.apply_async(routing_key='stashed_tasks')
-    return HttpResponse(json.dumps({'acknowledge': True}), content_type='application/json')
 
 
 def tasks(request):
