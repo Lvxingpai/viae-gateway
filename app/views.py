@@ -4,7 +4,7 @@ import json
 import uuid
 from datetime import datetime
 
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotAllowed
 from djcelery import celery
 
 from database import client
@@ -20,6 +20,13 @@ def stash_to_mongo(task_data):
     client.viae.ViaeTask.insert_one(task_data)
 
 
+def pong(request):
+    if request.method !='GET':
+        return HttpResponseNotAllowed(['GET'])
+
+    return HttpResponse('pong', content_type='text/plain')
+
+
 def tasks(request):
     """
     POST /tasks/
@@ -28,7 +35,7 @@ def tasks(request):
     :return:
     """
     if request.method != 'POST':
-        return HttpResponseNotFound()
+        return HttpResponseNotAllowed(['POST'])
     else:
         task_data = json.loads(request.body)
         task = task_data['task']
