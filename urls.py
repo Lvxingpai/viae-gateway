@@ -10,4 +10,3 @@ urlpatterns = [
     url(r'ping/?$', pong),
     url(r'^tasks/?$', tasks)
 ]
-

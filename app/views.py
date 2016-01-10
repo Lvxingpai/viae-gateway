@@ -21,7 +21,7 @@ def stash_to_mongo(task_data):
 
 
 def pong(request):
-    if request.method !='GET':
+    if request.method != 'GET':
         return HttpResponseNotAllowed(['GET'])
 
     return HttpResponse('pong', content_type='text/plain')
