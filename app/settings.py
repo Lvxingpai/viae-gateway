@@ -14,9 +14,9 @@ CELERY_CREATE_MISSING_QUEUES = True
 CELERY_DEFAULT_EXCHANGE = 'viae'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_QUEUES = {
-    'stashed_tasks': {
+    'viae-test': {
         'exchange': 'viae',
-        'routing_key': 'stashed_tasks'
+        'routing_key': 'test'
     }
 }
 CELERY_RESULT_BACKEND = ''
