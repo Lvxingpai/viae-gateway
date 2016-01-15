@@ -42,7 +42,7 @@ def tasks(request):
         args = task_data.get('args', [])
         kwargs = task_data.get('kwargs', {})
         countdown = task_data.get('countdown')
-        routing_key = task_data.get('routing_key')
+        routing_key = task_data.get('routingKey')
 
         if countdown > TASK_COUNTDOWN_THRESHOLD:
             eta = datetime.utcnow() + timedelta(seconds=countdown)
